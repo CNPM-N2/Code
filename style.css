@@ -1,0 +1,32 @@
+.introduce {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(82, 75, 75);
+  margin-bottom: 0px;
+  vertical-align: center;
+  display: inline-block;
+  margin-top: 0px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.logo-store {
+  height: 70px;
+  font-weight: 70px;
+  border-radius: 50px;
+  cursor: pointer;
+  vertical-align: top;
+  display: inline-block;
+}
+
+p {
+  font-family: Poppins, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: black;
+  background-color: rgb(183, 175, 175);
+  border-radius: 15px;
+  font-size: 20px;
+  text-align: center;
+}
