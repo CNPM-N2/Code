@@ -1,60 +1,68 @@
+p {
+  font-family: Roboto, Arial;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+body {
+  margin: 0;
+  padding-top: 80px;
+  background-image: url("Jewelry-Images/white-wedding-arrangement-with-space.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 .product-title {
   margin-top: 0;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 20px;
   margin-bottom: 12px;
+  color: #333333;
+  text-align: left;
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
 .thumbnail {
   width: 300px;
   cursor: pointer;
-  /*display: inline-block;*/
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(234, 217, 195);
+  padding: 15px;
+  transition: 0.3s ease-in-out;
 }
 
-.product-price,
-.product-stats {
-  font-size: 12px;
-  color: rgb(96, 96, 96);
+.thumbnail:hover {
+  transform: scale(1.03);
+  background-color: rgb(253, 247, 236);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-.product-stats {
+.product-price {
+  font-size: 16px;
+  color: #d62828;
+  font-weight: bold;
   text-align: left;
+  margin-bottom: 10px;
+}
+
+.product-stats {
+  font-size: 16px;
+  color: rgb(119, 114, 111);
+  text-align: justify;
   margin-top: 16px;
   margin-bottom: 0px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.product-price {
-  margin-bottom: 4px;
-}
-
-/*.product-preview {
-  width: 100%;
-  inline-block: change to the block when the div takes row
-  display: inline-block;
-  bring the element to the top
-  vertical-align: top;
-  margin-right: 15px;
-}*/
 
 .product-info-grid {
   display: grid;
-  /*50px for profile picture*/
-  /*1fr for the text*/
   grid-template-columns: 1fr;
 }
-
-/*.channel-picture {
-  display: inline-block;
-  width: 50px;
-  vertical-align: top;
-  background-color: gray;
-}*/
-
-/*.product-info-grid {
-  display: inline-block;
-  width: 245px;
-  background-color: gray;
-}*/
 
 .profile-picture {
   width: 40px;
@@ -68,36 +76,67 @@
 .product-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 16px;
-  row-gap: 40px;
+  column-gap: 150px;
+  row-gap: 45px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
-.website-logo {
-  height: 100px;
-  width: 100px;
-  margin-right: 10px;
+.header {
+  height: 55px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(228, 228, 228);
 }
 
 .left-section {
-  width: 150px;
   display: flex;
   align-items: center;
 }
 
+.website-menu {
+  height: 24px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.website-logo {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
 .middle-section {
-  margin-left: 400px;
-  margin-right: 400px;
-  vertical-align: center;
+  flex: 1;
+  margin-left: 70px;
+  margin-right: 35px;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
 }
 
 .right-section {
-  background-color: lightblue;
-  width: 200px;
+  width: 180px;
+  margin-right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
 .search-button {
-  height: 40px;
-  width: 66px;
+  height: 38px;
+  width: 40px;
   background-color: rgb(240, 240, 240);
   border-width: 1px;
   border-style: solid;
@@ -109,15 +148,15 @@
 
 .search-bar {
   flex: 1;
-  height: 36px;
+  height: 34px;
   padding-left: 10px;
   font-size: 16px;
   border-width: 1px;
   border-style: solid;
-  border-color: rgb(192, 192, 192);
+  border-color: rgb(204, 204, 204);
   border-radius: 2px;
   box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.05);
-  margin-top: 0px;
+  margin-top: 0;
 }
 
 .search-bar::placeholder {
@@ -127,8 +166,53 @@
 
 .search-icon {
   height: 25px;
-  margin-top: 0px;
-  vertical-align: top;
-  margin-left: 0px;
-  margin-right: 0px;
+  margin-top: 4px;
+}
+
+.user-icon {
+  height: 40px;
+  border-radius: 8px;
+  margin-left: 120px;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  margin-left: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  column-gap: 50px;
+}
+
+.support-info {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: white;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 500px;
+  margin: 5px;
+}
+
+.support-info:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.support-title {
+  display: flex;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: black;
+  text-align: justify;
+}
+
+.support-stats {
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgb(85, 85, 85);
+  text-align: left;
 }
