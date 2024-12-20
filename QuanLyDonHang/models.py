@@ -23,4 +23,4 @@ class Order(models.Model):
         super().save(*args, **kwargs)  
 
     def __str__(self):  
-        return f"Order {self.id}: {self.product.name} x {self.quantity}"
+        return f"Đơn Bán {self.id}: {self.product.name} x {self.quantity}"
