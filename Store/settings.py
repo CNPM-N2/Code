@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'Store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',  # Hoặc 'django.db.backends.mysql' nếu sử dụng MySQL
+        'NAME': 'your_db_name',
+        'USER': 'your_user',
+        'PASSWORD': 'your_password',
+        'HOST': 'db',  # Tên dịch vụ trong docker-compose.yml
+        'PORT': '5432',  # Hoặc '3306' nếu sử dụng MySQL
     }
 }
 
