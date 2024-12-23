@@ -37,7 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'QuanLyDonHang',
+    'app_CapNhatHienThiBangGiaVang',
+    'app_DoanhThuVaBaoCao',
+    'app_Home',    
+    'app_KhuyenMaiUuDai',
+    'app_QuanLyDonHang',
+    'app_QuanLyGiaoDichMuaBan',
+    'app_QuanLySanPham',
+    'app_User',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +87,7 @@ DATABASES = {
         'NAME': 'your_db_name',
         'USER': 'your_user',
         'PASSWORD': 'your_password',
-        'HOST': 'db',  # Tên dịch vụ trong docker-compose.yml
+        'HOST': '127.0.0.1',  # Tên dịch vụ trong docker-compose.yml
         'PORT': '5432',  # Hoặc '3306' nếu sử dụng MySQL
     }
 }
