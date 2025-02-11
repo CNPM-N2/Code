@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Jewelry Store</title>
-        <link rel="stylesheet"
-            href="/Code-master (1)/Code-master/Store/home/css/main.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-        <script src="script/GoldPriceDashboard.js"></script>
-    </head>
     {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Store</title>
+    <link rel="stylesheet" href="{% static 'css/main' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="{% static 'js/GoldPriceDashboard.js' %}"></script>
+</head>
     <body>
         <header class="header">
             <div class="logo-section">
                 <img class="website-logo"
-                    src="/Code-master (1)/Code-master/Jewelry-Images/logo store.jpeg"
+                    src="{% static 'images/logo store.jpeg' %}"
                     alt="Logo">
                 <h1 style="color: #000000; font-size: 24px;">Jewelry Store</h1>
             </div>
