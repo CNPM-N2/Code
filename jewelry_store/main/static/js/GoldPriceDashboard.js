@@ -1,10 +1,11 @@
 class GoldPriceChart {
   constructor(containerId) {
+    console.log("GoldPriceChart initialized on", containerId);
     this.container = document.getElementById(containerId);
     this.data = [];
     this.chart = null;
     this.exchangeRate = 24350;
-    this.currentView = "7days"; // Mặc định xem 7 ngày gần nhất
+    this.currentView = "7days";
     this.initializeChart();
   }
 
@@ -12,7 +13,6 @@ class GoldPriceChart {
     const chartContainer = document.createElement("div");
     chartContainer.className = "gold-price-chart";
 
-    // Tạo tiêu đề và controls
     const header = document.createElement("div");
     header.className = "chart-header";
     header.innerHTML = `
@@ -28,7 +28,6 @@ class GoldPriceChart {
           </div>
       `;
 
-    // Tạo bảng giá hiện tại
     const priceTable = document.createElement("div");
     priceTable.className = "current-prices";
     priceTable.innerHTML = `
@@ -58,7 +57,6 @@ class GoldPriceChart {
           </div>
       `;
 
-    // Tạo canvas cho biểu đồ
     const canvas = document.createElement("canvas");
     canvas.id = "goldChart";
 
@@ -67,7 +65,6 @@ class GoldPriceChart {
     chartContainer.appendChild(canvas);
     this.container.appendChild(chartContainer);
 
-    // Thêm event listeners
     const timeRange = document.getElementById("timeRange");
     const customDate = document.getElementById("customDate");
 
@@ -80,12 +77,10 @@ class GoldPriceChart {
       this.loadSpecificDate(e.target.value);
     });
 
-    // Khởi tạo dữ liệu
     this.loadHistoricalData("7days");
   }
 
   loadHistoricalData(period) {
-    // Giả lập dữ liệu lịch sử
     const days = period === "7days" ? 7 : period === "30days" ? 30 : 90;
     this.data = [];
 
@@ -93,7 +88,6 @@ class GoldPriceChart {
       const date = new Date();
       date.setDate(date.getDate() - i);
 
-      // Tạo giá ngẫu nhiên nhưng có xu hướng
       const trendFactor = Math.sin(i / 10) * 100000;
       const basePriceBuy = 5900000 + trendFactor;
       const basePriceSell = basePriceBuy + 50000;
@@ -112,7 +106,6 @@ class GoldPriceChart {
   }
 
   loadSpecificDate(date) {
-    // Giả lập dữ liệu cho ngày cụ thể
     const selectedDate = new Date(date);
     const randomFactor = Math.sin(selectedDate.getTime()) * 100000;
 
@@ -125,7 +118,6 @@ class GoldPriceChart {
 
     this.updatePriceTable(dayData);
 
-    // Hiển thị dữ liệu 7 ngày xung quanh ngày được chọn
     this.data = [];
     for (let i = -3; i <= 3; i++) {
       const currentDate = new Date(selectedDate);
@@ -160,7 +152,6 @@ class GoldPriceChart {
     worldPriceEl.textContent = `$${priceData.worldPrice.toFixed(2)}`;
     worldPriceVndEl.textContent = this.formatVND(worldPriceVnd);
 
-    // Cập nhật ngày
     const formattedDate = new Date(priceData.date).toLocaleDateString("vi-VN", {
       year: "numeric",
       month: "long",

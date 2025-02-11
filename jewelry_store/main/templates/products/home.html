@@ -1,46 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jewelry Store</title>
-    <link rel="stylesheet" href="{% static 'css/main' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <script src="{% static 'js/GoldPriceDashboard.js' %}"></script>
-</head>
-    <body>
-        <header class="header">
-            <div class="logo-section">
-                <img class="website-logo"
-                    src="{% static 'images/logo store.jpeg' %}"
-                    alt="Logo">
-                <h1 style="color: #000000; font-size: 24px;">Jewelry Store</h1>
-            </div>
+{% extends "base.html" %}
+{% load static %}
 
-            <div class="search-section">
-                <input type="text" class="search-bar" placeholder="Search...">
-                <i class="fas fa-search search-icon"></i>
-            </div>
-
-            <div class="header-icons">
-                <div class="header-icon">
-                    <i class="fas fa-bell" style="font-size: 20px;"></i>
-                    <span class="notification-badge">99+</span>
-                </div>
-                <div class="header-icon">
-                    <i class="fas fa-envelope" style="font-size: 20px;"></i>
-                    <span class="notification-badge">99+</span>
-                </div>
-                <div class="header-icon">
-                    <i class="fas fa-user" style="font-size: 20px;"></i>
-                </div>
-            </div>
-        </header>
-
+{% block title %}Trang chủ - Jewelry Store{% endblock %}
+{% block content %}
         <header>
-            <div class="brand-introduction">
+            <div class="brand-introduction" style="background-image: url('/static/images/Jewelry-Images/background.jpg');">
                 <div class="introduction-content">
                     <h2>Khám Phá Vẻ Đẹp Vĩnh Cửu Tại UTH Jewelry Store</h2>
                     <p>Tại UTH Jewelry Store, chúng tôi tự hào là điểm đến đáng
@@ -75,40 +39,11 @@
             </div>
         </header>
 
-        <nav class="sidebar">
-            <a href="#" class="sidebar-link">
-                <i class="fas fa-home"></i>
-                <span>Trang chủ</span>
-            </a>
-            <a href="#products-section" class="sidebar-link">
-                <i class="fas fa-gem"></i>
-                <span>Sản phẩm</span>
-            </a>
-            <a href="#" class="sidebar-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Đơn hàng</span>
-            </a>
-            <a href="#customer-reviews" class="sidebar-link">
-                <i class="fas fa-users"></i>
-                <span>Khách hàng</span>
-            </a>
-            <a href="#goldPriceContainer" class="sidebar-link">
-                <i class="fas fa-chart-bar"></i>
-                <span>Thống kê</span>
-            </a>
-            <a href="#support-section" class="sidebar-link">
-                <i class="fas fa-headset"></i>
-                <span>Hỗ trợ</span>
-            </a>
-        </nav>
-        <main>
             <h2 id="products-section" class="section-title">Sản phẩm nổi
                 bật</h2>
             <div class="product-grid">
                 <div class="product-preview">
-                    <img class="thumbnail"
-                        src="/Code-master (1)/Code-master/Jewelry-Images/products/bong-tai-kim-cuong-vang-trang-14k.jpg"
-                        alt="Bông tai">
+                    <img src="{% static 'images/Jewelry-Images/products/bong-tai-kim-cuong-vang-trang-14k.jpg' %}" alt="Bông tai kim cương">
                     <div class="product-info">
                         <h3 class="product-title">Bông tai Kim cương Vàng trắng
                             14K</h3>
@@ -119,7 +54,7 @@
                 </div>
                 <div class="product-preview">
                     <img class="thumbnail"
-                        src="/Code-master (1)/Code-master/Jewelry-Images/products/bong-tai-vang-18k-dinh-da-ruby.jpg"
+                        src="{% static 'images/Jewelry-Images/products/bong-tai-vang-18k-dinh-da-ruby.jpg' %}"
                         alt="Bông tai">
                     <div class="product-info">
                         <h3 class="product-title">Bông tai Vàng 18K đính đá
@@ -132,7 +67,7 @@
                 </div>
                 <div class="product-preview">
                     <img class="thumbnail"
-                        src="/Code-master (1)/Code-master/Jewelry-Images/products/mat-day-chuyen-vang-trang-14k-dinh-da-topaz.jpg"
+                        src="{% static 'images/Jewelry-Images/products/mat-day-chuyen-vang-trang-14k-dinh-da-topaz.jpg' %}"
                         alt="Bông tai">
                     <div class="product-info">
                         <h3 class="product-title">Mặt dây chuyền kim cương
@@ -145,7 +80,7 @@
                 </div>
                 <div class="product-preview">
                     <img class="thumbnail"
-                        src="/Code-master (1)/Code-master/Jewelry-Images/products/mat-day-chuyen-vang-18k-dinh-da-ruby.jpg"
+                        src="{% static 'images/Jewelry-Images/products/mat-day-chuyen-vang-18k-dinh-da-ruby.jpg' %}"
                         alt="Bông tai">
                     <div class="product-info">
                         <h3 class="product-title">Mặt dây chuyền vàng 18K
@@ -158,7 +93,7 @@
                 </div>
                 <div class="product-preview">
                     <img class="thumbnail"
-                        src="/Code-master (1)/Code-master/Jewelry-Images/products/nhan-vang-18k.jpg"
+                        src="{% static 'images/Jewelry-Images/products/nhan-vang-18k.jpg' %}"
                         alt="Bông tai">
                     <div class="product-info">
                         <h3 class="product-title">Nhẫn Vàng 18K</h3>
@@ -177,7 +112,7 @@
                     <div class="review-card">
                         <div class="reviewer-info">
                             <img
-                                src="/Code-master (1)/Code-master/Jewelry-Images/customers/brown-cat-with-big-eyes-from-tiktok-v0-5e7qti5qejec1.jpg"
+                                src="{% static 'images/Jewelry-Images/customers/brown-cat-with-big-eyes-from-tiktok-v0-5e7qti5qejec1.jpg' %}"
                                 alt="Customer"
                                 class="reviewer-avatar">
                             <div class="reviewer-details">
@@ -199,7 +134,7 @@
                     <div class="review-card">
                         <div class="reviewer-info">
                             <img
-                                src="/Code-master (1)/Code-master/Jewelry-Images/customers/images.jpg"
+                                src="{% static 'images/Jewelry-Images/customers/images.jpg' %}"
                                 alt="Customer"
                                 class="reviewer-avatar">
                             <div class="reviewer-details">
@@ -221,7 +156,7 @@
                     <div class="review-card">
                         <div class="reviewer-info">
                             <img
-                                src="/Code-master (1)/Code-master/Jewelry-Images/customers/silly.jpg"
+                                src="{% static 'images/Jewelry-Images/customers/silly.jpg' %}"
                                 alt="Customer"
                                 class="reviewer-avatar">
                             <div class="reviewer-details">
@@ -292,4 +227,4 @@
             </div>
         </footer>
     </body>
-</html>
+{% endblock %}
