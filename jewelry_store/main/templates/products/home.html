@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+<a href="{% url 'login' %}">Đăng nhập</a>
+
+{% if user.is_authenticated %}
+    <p>Chào {{ user.username }}!</p>
+    <a href="{% url 'logout' %}">Đăng xuất</a>
+{% else %}
+    <a href="{% url 'login' %}">Đăng nhập</a>
+{% endif %}
+
 {% block title %}Trang chủ - Jewelry Store{% endblock %}
 {% block content %}
         <header>
