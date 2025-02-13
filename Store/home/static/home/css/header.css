@@ -25,11 +25,11 @@
   border-radius: 50%;
 }
 
-
-
 .search-section {
-  background-color: rgba(255, 0, 0, 0.2); /* Màu nền nhạt để test */
-  border: 1px solid red; /* Đường viền đỏ */
+  flex: 1;
+  max-width: 500px;
+  margin: 0 20px;
+  position: relative;
 }
 
 .search-bar {
