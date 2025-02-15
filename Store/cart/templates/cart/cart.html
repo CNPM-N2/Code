@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Jewelry Store{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+        <script src="{% static 'home/js/GoldPriceDashboard.js' %}"></script>
+
+        <header>
+           
+        </header>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="logo-section">
+                <img class="website-logo" src="{% static 'home/images/logo_store.jpeg' %}" alt="Logo">
+                <h1 style="color: #000000; font-size: 24px;">Jewelry Store</h1>
+            </div>
+
+            <div class="search-section">
+                <input type="text" class="search-bar" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <div class="header-icons">
+                <div class="header-icon">
+                    <i class="fas fa-bell" style="font-size: 20px;"></i>
+                    <span class="notification-badge">99+</span>
+                </div>
+                <div class="header-icon">
+                    <i class="fas fa-envelope" style="font-size: 20px;"></i>
+                    <span class="notification-badge">99+</span>
+                </div>
+                <div class="header-icon">
+                    <i class="fas fa-user" style="font-size: 20px;"></i>
+                </div>
+            </div>
+        </header>
+        <!--Biên trái-->
+        {% block content %}
+        <nav class="sidebar">
+            <a href="{% url 'home:index' %}" class="sidebar-link">
+                <i class="fas fa-home"></i>
+                <span>Trang chủ</span>
+            </a>
+            <!--Sản phẩm-->
+            <a href="#products-section" class="sidebar-link">
+                <i class="fas fa-gem"></i>
+                <span>Sản phẩm</span>
+            </a>
+            <!--Lập đơn hàng-->
+            <a href="{% url 'home:cart' %}" class="sidebar-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Đơn hàng</span>
+            </a> 
+            <!--Đánh giá của khách hàng-->
+            <a href="#customer-reviews" class="sidebar-link">
+                <i class="fas fa-users"></i>
+                <span>Khách hàng</span>
+            </a>
+            <a href="#goldPriceContainer" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i>
+                <span>Thống kê</span>
+            </a>
+            <a href="#support-section" class="sidebar-link">
+                <i class="fas fa-headset"></i>
+                <span>Hỗ trợ</span>
+            </a>
+            <a href="{% url 'repurchase:create' %}?cart={{ cart.id }}" class="repurchase-btn">
+                <i class="fas fa-redo"></i>
+                <span>Tạo đơn mua lại</span>
+            </a>
+        </nav>
+
+        <!--Phần chính-->
+        <main>
+        <!-- Cart Content -->
+    <div class="content-area">
+        <!-- Thông tin hóa đơn -->
+    <div class="invoice-header">
+    <h2>Hóa Đơn Bán Hàng</h2>
+        <div class="invoice-info">
+        <div class="info-group">
+            <div class="input-field">
+                <label><strong>Mã hóa đơn:</strong></label>
+                <input type="text" id="invoiceId" placeholder="VD: HD001" required>
+            </div>
+            <div class="input-field">
+                <label><strong>Ngày lập:</strong></label>
+                <input type="datetime-local" id="invoiceDate" required>
+            </div>
+        </div>
+        <div class="info-group">
+            <div class="input-field">
+                <label><strong>Khách hàng:</strong></label>
+                <input type="text" id="customerName" placeholder="Nhập tên khách hàng" required>
+            </div>
+            <div class="input-field">
+                <label><strong>Số điện thoại:</strong></label>
+                <input type="tel" id="customerPhone" placeholder="Nhập số điện thoại" pattern="[0-9]{10}" required>
+            </div>
+        </div>
+    </div>
+<!-- Thêm phần tổng quan đơn hàng -->
+<div class="order-overview">
+    <div class="overview-item">
+        <i class="fas fa-shopping-basket"></i>
+        <div class="overview-info">
+            <span class="overview-label">Tổng sản phẩm:</span>
+            <span class="overview-value" id="totalItems">0</span>
+        </div>
+    </div>
+    <div class="overview-item">
+        <i class="fas fa-money-bill-wave"></i>
+        <div class="overview-info">
+            <span class="overview-label">Tổng thông toán:</span>
+            <span class="overview-value" id="totalAmount">0 ₫</span>
+        </div>
+    </div>
+</div>
+<!-- Bảng sản phẩm -->
+<div class="products-table">
+    <div class="barcode-scanner">
+        <input type="text" id="barcodeInput" placeholder="Quét mã sản phẩm">
+        <button class="scan-btn"><i class="fas fa-barcode"></i> Quét mã</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã SP</th>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody id="productList">
+            <tr>
+                <td>1</td>
+                <td>
+                    <input type="text" class="product-code" placeholder="Nhập mã SP">
+                </td>
+                <td>
+                    <div class="product-info">
+                        <img src="{% static 'home/images/product1.jpg' %}" alt="Sản phẩm">
+                        <div>
+                            <input type="text" class="product-name" placeholder="Tên sản phẩm">
+                            <p class="product-id">Mã: <span></span></p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <input type="number" class="price-input" min="0" step="0.01" placeholder="0.00">
+                </td>
+                <td>
+                    <div class="quantity-control">
+                        <button class="qty-btn minus">-</button>
+                        <input type="number" class="qty-input" value="1" min="1">
+                        <button class="qty-btn plus">+</button>
+                    </div>
+                </td>
+                <td class="subtotal">$0.00</td>
+                <td>
+                    <button class="delete-btn"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="add-product-btn"><i class="fas fa-plus"></i> Thêm sản phẩm</button>
+<!-- Nút chức năng hóa đơn -->
+<div class="invoice-actions">
+    <div class="action-group">
+        <button class="action-btn new-btn" onclick="newInvoice()">
+            <i class="fas fa-plus-circle"></i>
+            <span>Tạo hóa đơn mới</span>
+        </button>
+        <button class="action-btn save-btn" onclick="saveInvoice()">
+            <i class="fas fa-save"></i>
+            <span>Lưu hóa đơn</span>
+        </button>
+    </div>
+    
+    <div class="action-group">
+        <button class="action-btn print-btn" onclick="printInvoice()">
+            <i class="fas fa-print"></i>
+            <span>In hóa đơn</span>
+        </button>
+        <button class="action-btn checkout-btn" onclick="processPayment()">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Thanh toán</span>
+        </button>
+    </div>
+
+</div>
+        </main>
+        
+        <footer>
+               
+        </footer>
+        {% endblock content %}
+    </body>
+</html>

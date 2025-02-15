@@ -1,0 +1,36 @@
+{% extends 'home/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="repurchase-container">
+    <div class="repurchase-header">
+        <h2>Danh Sách Yêu Cầu Mua Lại</h2>
+        <a href="{% url 'repurchase:create' %}" class="create-btn">
+            <i class="fas fa-plus"></i> Tạo Yêu Cầu Mới
+        </a>
+    </div>
+
+    <div class="repurchase-list">
+        {% for repurchase in repurchases %}
+        <div class="repurchase-item">
+            <div class="item-info">
+                <h3>{{ repurchase.product_name }}</h3>
+                <p>Mã SP: {{ repurchase.product_code }}</p>
+                <p>Số lượng: {{ repurchase.quantity }}</p>
+                <p>Giá: {{ repurchase.price }}</p>
+                <p>Trạng thái: <span class="status-{{ repurchase.status|lower }}">{{ repurchase.status }}</span></p>
+            </div>
+            <div class="item-actions">
+                <a href="{% url 'repurchase:detail' repurchase.pk %}" class="detail-btn">
+                    <i class="fas fa-eye"></i> Chi tiết
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-items">
+            <p>Chưa có yêu cầu mua lại nào</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

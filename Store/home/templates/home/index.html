@@ -1,0 +1,359 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Jewelry Store{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'home/css/main.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+        <script src="{% static 'home/js/GoldPriceDashboard.js' %}"></script>
+
+        <header>
+            <div class="brand-introduction" style="background-image: url({% static 'home/images/background.jpg' %})">
+                <div class="introduction-content">
+                    <h2>Khám Phá Vẻ Đẹp Vĩnh Cửu Tại UTH Jewelry Store</h2>
+                    <p>Tại UTH Jewelry Store, chúng tôi tự hào là điểm đến đáng
+                        tin cậy cho những ai tìm kiếm sự thanh lịch và tinh tế
+                        trong từng món đồ trang sức. Với đội ngũ nghệ nhân tay
+                        nghề cao và nhiều năm kinh nghiệm, chúng tôi tự hào tạo
+                        ra những thiết kế vượt thời gian, nắm bắt được bản chất
+                        của vẻ đẹp và sự sang trọng.</p>
+                    <div class="introduction-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-gem" style="color: #ffffff;"></i>
+                            <span style="color: #ffffff;">Nguyên Liệu Cao
+                                Cấp</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-hands-holding"
+                                style="color: #ffffff;"></i>
+                            <span style="color: #ffffff;">Thủ Công Tinh
+                                Xảo</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-certificate"
+                                style="color: #ffffff;"></i>
+                            <span style="color: #ffffff;">Chất Lượng Quốc
+                                Tế</span>
+                        </div>
+                    </div>
+                    <a href="#products-section" class="cta-button"><b>Khám Phá
+                            Bộ Sưu
+                            Tập</b></a>
+                </div>
+            </div>
+        </header>
+    </head>
+
+    <body>
+        <header class="header">
+            <div class="logo-section">
+                <img class="website-logo" src="{% static 'home/images/logo_store.jpeg' %}" alt="Logo">
+                <h1 style="color: #000000; font-size: 24px;">Jewelry Store</h1>
+            </div>
+
+            <div class="search-section">
+                <input type="text" class="search-bar" placeholder="Search...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+
+            <div class="header-icons">
+                <div class="header-icon">
+                    <i class="fas fa-bell" style="font-size: 20px;"></i>
+                    <span class="notification-badge">99+</span>
+                </div>
+                <div class="header-icon">
+                    <i class="fas fa-envelope" style="font-size: 20px;"></i>
+                    <span class="notification-badge">99+</span>
+                </div>
+                <div class="header-icon">
+                    <i class="fas fa-user" style="font-size: 20px;"></i>
+                </div>
+            </div>
+        </header>
+        <!--Biên trái-->
+        {% block content %}
+        <nav class="sidebar">
+            <a href="#" class="sidebar-link">
+                <i class="fas fa-home"></i>
+                <span>Trang chủ</span>
+            </a>
+            <!--Sản phẩm-->
+            <a href="#products-section" class="sidebar-link">
+                <i class="fas fa-gem"></i>
+                <span>Sản phẩm</span>
+            </a>
+            <!--Lập đơn hàng-->
+            <a href="{% url 'cart:cart' %}" class="sidebar-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Đơn hàng</span>
+            </a> 
+            <!--Đánh giá của khách hàng-->
+            <a href="#customer-reviews" class="sidebar-link">
+                <i class="fas fa-users"></i>
+                <span>Khách hàng</span>
+            </a>
+            <a href="#goldPriceContainer" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i>
+                <span>Thống kê</span>
+            </a>
+            <a href="#support-section" class="sidebar-link">
+                <i class="fas fa-headset"></i>
+                <span>Hỗ trợ</span>
+            </a>
+        </nav>
+        <main>
+            <h2 id="products-section" class="section-title">Sản phẩm nổi
+                bật</h2>
+            <div class="product-grid">
+                <div class="product-preview">
+                    <img class="thumbnail"
+                        src="{% static 'home/images/products/bong-tai-kim-cuong-vang-trang-14k.jpg' %}"
+                        alt="Bông tai">
+                    <div class="product-info">
+                        <h3 class="product-title">Bông tai Kim cương Vàng trắng
+                            14K</h3>
+                        <p class="product-stats">Đôi bông tai được chế tác từ
+                            vàng 14K và sở hữu kiểu dáng nhỏ xinh.</p>
+                        <a href="#" class="product-view-more">Xem thêm</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <img class="thumbnail"
+                        src="{% static 'home/images/products/bong-tai-vang-18k-dinh-da-ruby.jpg' %}"
+                        alt="Bông tai">
+                    <div class="product-info">
+                        <h3 class="product-title">Bông tai Vàng 18K đính đá
+                            Ruby</h3>
+                        <p class="product-stats">Đôi bông tai được chế tác từ
+                            vàng 18K, mang đến sản phẩm sở hữu thiết kế tinh xảo
+                            đầy quý phái.</p>
+                        <a href="#" class="product-view-more">Xem thêm</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <img class="thumbnail"
+                        src="{% static 'home/images/products/mat-day-chuyen-vang-trang-14k-dinh-da-topaz.jpg' %}"
+                        alt="Bông tai">
+                    <div class="product-info">
+                        <h3 class="product-title">Mặt dây chuyền kim cương
+                            vàng trắng 14K</h3>
+                        <p class="product-stats">Không chỉ sang trọng, kim cương
+                            còn là loại đá cứng cỏi, bền bỉ bậc nhất hiện
+                            nay.</p>
+                        <a href="#" class="product-view-more">Xem thêm</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <img class="thumbnail"
+                        src="{% static 'home/images/products/mat-day-chuyen-vang-18k-dinh-da-ruby.jpg' %}"
+                        alt="Bông tai">
+                    <div class="product-info">
+                        <h3 class="product-title">Mặt dây chuyền vàng 18K
+                            đính đá Ruby</h3>
+                        <p class="product-stats">Sẽ rất tuyệt vời nếu bạn chọn
+                            cho mình trang sức gắn Ruby - hấp dẫn bất kì ai bởi
+                            sắc màu ấm áp và nồng nàn.</p>
+                        <a href="#" class="product-view-more">Xem thêm</a>
+                    </div>
+                </div>
+                <div class="product-preview">
+                    <img class="thumbnail"
+                        src="{% static 'home/images/products/nhan-vang-18k.jpg' %}"
+                        alt="Bông tai">
+                    <div class="product-info">
+                        <h3 class="product-title">Nhẫn Vàng 18K</h3>
+                        <p class="product-stats">Với sự sáng tạo tạo đến từ gu
+                            thẩm mĩ không thể hòa lẫn, chiếc nhẫn được chế tác
+                            với kỹ thuật chuyên nghiệp, mang đến sản phẩm tinh
+                            xảo đến từng chi tiết</p>
+                        <a href="#" class="product-view-more">Xem thêm</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="customer-reviews" id="customer-reviews">
+                <h2 class="section-title">Đánh giá từ khách hàng</h2>
+                <div class="reviews-container">
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img class="reviewer-avatar"
+                                src="{% static 'home/images/customers/brown-cat-with-big-eyes-from-tiktok-v0-5e7qti5qejec1.jpg' %}"
+                                alt="Customer">
+                            <div class="reviewer-details">
+                                <h4>Nguyễn Thị Anh</h4>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p
+                            class="review-text">"Trang sức ở đây xịn xò, nhìn mê chữ ê kéo dài luôn! 💍✨ Dịch vụ khách hàng đỉnh của chóp, tận tâm khỏi bàn, đẹp xỉu luôn ấy! "</p>
+                        <span class="review-date">01/01/2025</span>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img src="{% static 'home/images/customers/images.jpg' %}" alt="Customer" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h4>Nguyễn Thị Hà</h4>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p
+                            class="review-text">"Chất lượng khỏi chê, giá thì siêu hợp lý! 😍 Nhân viên tư vấn siêu có tâm, chuyên nghiệp dữ luôn! 🔥✨"</p>
+                        <span class="review-date">20/01/2025</span>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="reviewer-info">
+                            <img src="{% static 'home/images/customers/silly.jpg' %}" alt="Customer" class="reviewer-avatar">
+                            <div class="reviewer-details">
+                                <h4>Lê Thu Thảo</h4>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p
+                            class="review-text">"Mua một lần mà mê luôn! Chất lượng khỏi bàn, thiết kế xịn sò, nhìn là muốn hốt ngay. 🛍️💖 Ai mà ghiền trang sức nhất định phải ghé thử nha!"</p>
+                        <span class="review-date">15/02/2025</span>
+                    </div>
+                </div>
+                <!--Thống kê-->
+                <div id="goldPriceContainer"></div>
+                <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    new GoldPriceChart('goldPriceContainer');
+                });
+            </script>
+                
+            <!-- Thống kê doanh thu theo quầy -->
+            <div id="statistics" class="statistics-section">
+                <div class="stats-container">
+                    <h2 class="stats-title">Doanh Thu Theo Quầy</h2>
+                    <div class="stats-table">
+                        <table class="revenue-table">
+                            <thead>
+                                <tr>
+                                    <th>Quầy</th>
+                                    <th>Số đơn hàng</th>
+                                    <th>Doanh thu</th>
+                                    <th>Tỷ lệ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Quầy 1</strong></td>
+                                    <td>150</td>
+                                    <td>$15,000</td>
+                                    <td>20%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quầy 2</strong></td>
+                                    <td>180</td>
+                                    <td>$18,000</td>
+                                    <td>24%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quầy 3</strong></td>
+                                    <td>120</td>
+                                    <td>$12,000</td>
+                                    <td>16%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quầy 4</strong></td>
+                                    <td>90</td>
+                                    <td>$9,000</td>
+                                    <td>12%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quầy 5</strong></td>
+                                    <td>110</td>
+                                    <td>$11,000</td>
+                                    <td>15%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Quầy 6</strong></td>
+                                    <td>95</td>
+                                    <td>$9,500</td>
+                                    <td>13%</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="total-row">
+                                    <td><strong>Tổng</strong></td>
+                                    <td><strong>745</strong></td>
+                                    <td><strong>$74,500</strong></td>
+                                    <td><strong>100%</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                <!--Hoạt động gần đây-->
+                <div class="recent-activity">
+                    <h2 class="section-title">Hoạt động gần đây</h2>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div>
+                            <h4>Đơn hàng mới #2457</h4>
+                            <p>30 phút trước</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div>
+                            <h4>Khách hàng mới đăng ký</h4>
+                            <p>1 giờ trước</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="support-grid" id="support-section">
+                <div class="support-info">
+                    <h3 class="support-title">Liên hệ</h3>
+                    <p class="support-stats">&#9679; Hotline: 1900-5959</p>
+                    <p class="support-stats">&#9679; Email:
+                        support@jewelryuth.com</p>
+                    <p class="support-stats">&#9679; 70 Đ. Tô Ký, Tân Chánh
+                        Hiệp,
+                        Quận 12, Hồ Chí Minh</p>
+                </div>
+                <div class="support-info">
+                    <h3 class="support-title">Chính sách bảo hành</h3>
+                    <p class="support-stats">&#9679; Bảo hành áp dụng cho lỗi kỹ
+                        thuật từ nhà sản xuất</p>
+                    <p class="support-stats">&#9679; Sản phẩm hư gì thì đổi
+                        đó</p>
+                    <p class="support-stats">&#9679; Chế độ hậu mãi đặc quyền
+                        cho khách hàng</p>
+                    </div> 
+                </div>
+            </div>
+        </footer>
+        {% endblock content %}
+    </body>
+</html>

@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block content %}
+
+<div class="repurchase-create-container">
+    <div class="repurchase-create-box">
+        <h2>Tạo Yêu Cầu Mua Lại</h2>
+        
+        <form method="post" class="repurchase-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="product_name">Tên sản phẩm:</label>
+                <input type="text" name="product_name" id="product_name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="product_code">Mã sản phẩm:</label>
+                <input type="text" name="product_code" id="product_code" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Số lượng:</label>
+                <input type="number" name="quantity" id="quantity" min="1" value="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="price">Giá:</label>
+                <input type="number" name="price" id="price" step="0.01" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Ghi chú:</label>
+                <textarea name="notes" id="notes" rows="4"></textarea>
+            </div>
+            
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Tạo yêu cầu</button>
+                <a href="{% url 'repurchase:list' %}" class="cancel-btn">Hủy</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %} 
