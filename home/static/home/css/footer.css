@@ -1,0 +1,28 @@
+.support-grid {
+  background: #000000;
+  padding: 40px;
+  margin-top: 40px;
+  color: #fff;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.support-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.support-title {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 10px;
+}
+
+.support-stats {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
