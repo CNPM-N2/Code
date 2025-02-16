@@ -104,10 +104,11 @@ class ChinhSachBaoHanh(models.Model):
 class Vang(models.Model):
     ma_vang = models.CharField(max_length=20, primary_key=True)
     loai_vang = models.CharField(max_length=50)
+
     gia_mua = models.FloatField()
     gia_ban = models.FloatField()
     ngay_cap_nhat = models.DateField(auto_now=True)
-    
+  
     def __str__(self):
         return self.loai_vang
 

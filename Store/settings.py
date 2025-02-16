@@ -156,4 +156,5 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-GOLDAPI_KEY = 'goldapi-rx3d9sm77khn0a-io'  # API key của bạn
+GOLDAPI_KEY = 'goldapi-rx3d9sm77khn0a-io'
+
