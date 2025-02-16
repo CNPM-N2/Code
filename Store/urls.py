@@ -29,6 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),  # Include app "home"
     path('', include('core.urls')),  # Include app "core"
+
 ]
 
 # Cấu hình đường dẫn media

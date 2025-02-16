@@ -8,11 +8,13 @@ class GoldPriceChart {
     const chartContainer = document.createElement("div");
     chartContainer.className = "gold-price-chart";
 
+
     // Chỉ giữ lại tiêu đề
     const header = document.createElement("div");
     header.className = "chart-header";
     header.innerHTML = `
           <h2 class="section-title">Bảng Giá Vàng</h2>
+
       `;
 
     // Tạo bảng giá hiện tại
@@ -20,6 +22,7 @@ class GoldPriceChart {
     priceTable.className = "current-prices";
     priceTable.innerHTML = `
           <div class="price-card">
+
               <h3>Giá Vàng 24K</h3>
               <div class="price-date"></div>
               <div class="price-row">
@@ -69,6 +72,7 @@ class GoldPriceChart {
           </div>
       `;
 
+
     chartContainer.appendChild(header);
     chartContainer.appendChild(priceTable);
     this.container.appendChild(chartContainer);
@@ -92,11 +96,13 @@ class GoldPriceChart {
 
   updatePriceTable(priceData) {
     const priceDates = this.container.querySelectorAll(".price-date");
+
     const formattedDate = new Date(priceData.date).toLocaleDateString("vi-VN", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
+
 
     // Cập nhật giá cho từng loại vàng
     ['24k', '18k', '14k', '9k'].forEach(type => {
