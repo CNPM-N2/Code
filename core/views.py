@@ -107,7 +107,6 @@ def fetch_gold_prices():
     }
     
     try:
-        # Lấy giá vàng theo USD
         response = requests.get('https://www.goldapi.io/api/XAU/USD', headers=headers)
         print("API Response:", response.text)
         
@@ -125,52 +124,35 @@ def fetch_gold_prices():
             # 1 chỉ = 3.75 grams
             chi_to_gram = 3.75
             
-            # Tính giá cho các loại vàng (theo chỉ)
-            price_24k = price_gram_24k * usd_to_vnd * chi_to_gram
-            price_18k = price_gram_18k * usd_to_vnd * chi_to_gram
-            price_14k = price_gram_14k * usd_to_vnd * chi_to_gram
-            # Tính giá 9K (khoảng 37.5% của 24K)
-            price_9k = price_24k * 0.375
-            
-            # Làm tròn đến hàng nghìn
-            def round_price(price):
-                return round(price / 1000) * 1000
-            
+            # Tính giá theo chỉ
+            def calculate_price(price_gram):
+                return round((price_gram * usd_to_vnd * chi_to_gram) / 1000) * 1000
+
             prices = {
                 '24k': {
-                    'buy': round_price(price_24k - 50000),
-                    'sell': round_price(price_24k)
+                    'buy': calculate_price(price_gram_24k) - 50000,
+                    'sell': calculate_price(price_gram_24k)
                 },
                 '18k': {
-                    'buy': round_price(price_18k - 50000),
-                    'sell': round_price(price_18k)
+                    'buy': calculate_price(price_gram_18k) - 50000,
+                    'sell': calculate_price(price_gram_18k)
                 },
                 '14k': {
-                    'buy': round_price(price_14k - 50000),
-                    'sell': round_price(price_14k)
+                    'buy': calculate_price(price_gram_14k) - 50000,
+                    'sell': calculate_price(price_gram_14k)
                 },
                 '9k': {
-                    'buy': round_price(price_9k - 50000),
-                    'sell': round_price(price_9k)
+                    'buy': calculate_price(price_gram_24k * 0.375) - 50000,
+                    'sell': calculate_price(price_gram_24k * 0.375)
                 }
             }
             
-            # Lưu vào database
-            for type_key, prices_data in prices.items():
-                Vang.objects.update_or_create(
-                    loai_vang=type_key.upper(),
-                    defaults={
-                        'ma_vang': type_key.upper(),
-                        'gia_mua': prices_data['buy'],
-                        'gia_ban': prices_data['sell'],
-                        'ngay_cap_nhat': datetime.now().date()
-                    }
-                )
-            
+            print("Calculated prices:", prices)  # Debug log
             return prices
+            
     except Exception as e:
         print(f"Error fetching gold prices: {e}")
-    return None
+        return None
 
 def get_current_prices(request):
     # Thử lấy từ cache trước
@@ -231,3 +213,4 @@ def get_current_prices(request):
                 '9k': {'buy': 0, 'sell': 0},
             }
         }) 
+     
