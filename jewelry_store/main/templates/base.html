@@ -27,33 +27,44 @@
       {% endfor %}
     </div>
     {% endif %}
-    <header class="header">
+    <div class="header">
       <div class="logo-section">
-        <img
-          class="website-logo"
-          src="{% static 'images/Jewelry-Images/logo store.png' %}"
-          alt="Logo"
-        />
+        <img class="website-logo" src="{% static 'images/Jewelry-Images/logo store.png' %}" alt="Logo" />
         <h1 style="color: #000000; font-size: 24px">Jewelry Store</h1>
       </div>
+      
       <div class="search-section">
         <input type="text" class="search-bar" placeholder="Search..." />
         <i class="fas fa-search search-icon"></i>
       </div>
+      
       <div class="header-icons">
-        <div class="header-icon user-profile">
-          {% if user.is_authenticated %}
-          <i class="fas fa-user" style="font-size: 20px"></i>
-          <div class="dropdown-menu">
-            <a href="{% url 'admin:index' %}">Mục quản lý</a>
+        {% if user.is_authenticated %}
+          <div class="user-menu">
+            <button class="profile-button">
+              <i class="fas fa-user"></i>
+              <span>{{ user.username }}</span>
+            </button>
+            <div class="dropdown-content">
+              {% if user.is_staff %}
+                <a href="/admin/" class="dropdown-item">Quản lý</a>
+              {% endif %}
+              <form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none;">
+                {% csrf_token %}
+            </form>
+            <a href="#" class="dropdown-item" onclick="document.getElementById('logout-form').submit(); return false;">
+                Đăng xuất
+            </a>
+            </div>
           </div>
-          {% else %}
-          <a href="{% url 'login' %}">
-            <i class="fas fa-user" style="font-size: 20px"></i>
+        {% else %}
+          <a href="{% url 'login' %}" class="login-link">
+            <i class="fas fa-user"></i>
+            <span>Đăng nhập</span>
           </a>
-          {% endif %}
-        </div>
+        {% endif %}
       </div>
+    </div>
     </header>
 
     <nav class="sidebar">
