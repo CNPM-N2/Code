@@ -1,0 +1,17 @@
+.env
+*.log
+
+__pycache__/
+*.pyc
+
+*.sqlite3
+
+.DS_Store
+Thumbs.db
+
+/staticfiles/
+/media/
+
+node_modules/
+
+.vscode/

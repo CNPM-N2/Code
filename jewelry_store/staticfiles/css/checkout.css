@@ -1,0 +1,133 @@
+/* Checkout page container */
+.box-element {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Form styling */
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #4a90e2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74,144,226,0.2);
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+/* Button styling */
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    width: 100%;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-1px);
+}
+
+.btn-outline-dark {
+    color: #343a40;
+    border: 1px solid #343a40;
+    background: transparent;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-outline-dark:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+/* Order summary styling */
+.cart-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.row-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+/* Typography */
+h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+h5 {
+    color: #2c3e50;
+    margin: 15px 0;
+}
+
+/* Divider */
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+/* Hidden elements */
+.hidden {
+    display: none;
+}
+
+/* Payment info section */
+#payment-info {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .box-element {
+        padding: 15px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .cart-row {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .row-image {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
