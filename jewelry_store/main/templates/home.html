@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block title %}Trang chủ - Jewelry Store{% endblock %}
 {% block content %}
+<script>
+    window.initialData = {
+      products: JSON.parse('{{ san_pham_json|safe }}'),
+      isAuthenticated: {{ user.is_authenticated|yesno:"true,false" }},
+    };
+  </script>
         <header>
+            {% csrf_token %}
             <div class="brand-introduction" style="background-image: url('/static/images/Jewelry-Images/background.jpg');">
                 <div class="introduction-content">
                     <h2>Khám Phá Vẻ Đẹp Vĩnh Cửu Tại UTH Jewelry Store</h2>
@@ -38,74 +46,39 @@
                 </div>
             </div>
         </header>
-
-            <h2 id="products-section" class="section-title">Sản phẩm nổi
-                bật</h2>
-            <div class="product-grid">
-                <div class="product-preview">
-                    <img src="{% static 'images/Jewelry-Images/products/bong-tai-kim-cuong-vang-trang-14k.jpg' %}" alt="Bông tai kim cương">
-                    <div class="product-info">
-                        <h3 class="product-title">Bông tai Kim cương Vàng trắng
-                            14K</h3>
-                        <p class="product-stats">Đôi bông tai được chế tác từ
-                            vàng 14K và sở hữu kiểu dáng nhỏ xinh.</p>
-                        <a href="#" class="product-view-more">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="product-preview">
-                    <img class="thumbnail"
-                        src="{% static 'images/Jewelry-Images/products/bong-tai-vang-18k-dinh-da-ruby.jpg' %}"
-                        alt="Bông tai">
-                    <div class="product-info">
-                        <h3 class="product-title">Bông tai Vàng 18K đính đá
-                            Ruby</h3>
-                        <p class="product-stats">Đôi bông tai được chế tác từ
-                            vàng 18K, mang đến sản phẩm sở hữu thiết kế tinh xảo
-                            đầy quý phái.</p>
-                        <a href="#" class="product-view-more">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="product-preview">
-                    <img class="thumbnail"
-                        src="{% static 'images/Jewelry-Images/products/mat-day-chuyen-vang-trang-14k-dinh-da-topaz.jpg' %}"
-                        alt="Bông tai">
-                    <div class="product-info">
-                        <h3 class="product-title">Mặt dây chuyền kim cương
-                            vàng trắng 14K</h3>
-                        <p class="product-stats">Không chỉ sang trọng, kim cương
-                            còn là loại đá cứng cỏi, bền bỉ bậc nhất hiện
-                            nay.</p>
-                        <a href="#" class="product-view-more">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="product-preview">
-                    <img class="thumbnail"
-                        src="{% static 'images/Jewelry-Images/products/mat-day-chuyen-vang-18k-dinh-da-ruby.jpg' %}"
-                        alt="Bông tai">
-                    <div class="product-info">
-                        <h3 class="product-title">Mặt dây chuyền vàng 18K
-                            đính đá Ruby</h3>
-                        <p class="product-stats">Sẽ rất tuyệt vời nếu bạn chọn
-                            cho mình trang sức gắn Ruby - hấp dẫn bất kì ai bởi
-                            sắc màu ấm áp và nồng nàn.</p>
-                        <a href="#" class="product-view-more">Xem thêm</a>
-                    </div>
-                </div>
-                <div class="product-preview">
-                    <img class="thumbnail"
-                        src="{% static 'images/Jewelry-Images/products/nhan-vang-18k.jpg' %}"
-                        alt="Bông tai">
-                    <div class="product-info">
-                        <h3 class="product-title">Nhẫn Vàng 18K</h3>
-                        <p class="product-stats">Với sự sáng tạo tạo đến từ gu
-                            thẩm mĩ không thể hòa lẫn, chiếc nhẫn được chế tác
-                            với kỹ thuật chuyên nghiệp, mang đến sản phẩm tinh
-                            xảo đến từng chi tiết</p>
-                        <a href="#" class="product-view-more">Xem thêm</a>
-                    </div>
-                </div>
+        <div class="product-container">
+        <section id="products-section">
+            <div class="section-header">
+            <h2 class="section-title">Sản phẩm</h2>
             </div>
-
+            <div class="product-grid">
+                {% for san_pham in san_pham_list %}
+                <div class="product-preview">
+                  <img class="thumbnail" src="{{san_pham.ImageURL}}" alt="{{ san_pham.ten_sp }}">
+                  <div class="product-info">
+                    <h3 class="product-title">{{ san_pham.ten_sp }}</h3>
+                    <p class="product-stats">Mã sản phẩm: {{ san_pham.ma_sp }}</p>
+                    <p class="product-stats">Trọng lượng: {{ san_pham.trong_luong }}g</p>
+                    <p class="product-stats">Giá bán: {{ san_pham.gia_ban|floatformat:0|intcomma}} VNĐ</p>
+                    <p class="product-stats">Đá quý: 
+                      {% for chitiet in san_pham.chitietda_set.all %}
+                        {{ chitiet.da.ten_da }} ({{ chitiet.so_luong }} viên)
+                        {% if chitiet.da.mau_sac %}- {{ chitiet.da.mau_sac }}{% endif %}
+                        {% if not forloop.last %}, {% endif %}
+                      {% endfor %}
+                    </p>
+                    <button class="add-to-cart-btn" 
+                    data-product-id="{{ san_pham.ma_sp }}"
+                    data-product-name="{{ san_pham.ten_sp }}"
+                    data-product-price="{{ san_pham.gia_ban }}">
+                        <i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng
+                    </button>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+        </div>
+        </section>
             <div class="customer-reviews" id="customer-reviews">
                 <h2 class="section-title">Đánh giá từ khách hàng</h2>
                 <div class="reviews-container">
@@ -180,6 +153,7 @@
                     import GoldPriceChart from "{% static 'js/GoldPriceChart.js'%}";
                     GoldPriceChart(document.getElementById('gold-price-root'));
                   </script>
+                </script>
                 <div class="recent-activity">
                     <h2 class="section-title">Hoạt động gần đây</h2>
                     <div class="activity-item">
@@ -187,7 +161,7 @@
                             <i class="fas fa-shopping-bag"></i>
                         </div>
                         <div>
-                            <h4>Đơn hàng mới #2457</h4>
+                            <h4>Đơn hàng mới #****</h4>
                             <p>30 phút trước</p>
                         </div>
                     </div>

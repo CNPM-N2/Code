@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+<script src="{% static 'js/cart-handler.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div id="toast" class="toast"></div>
+<div class="cart-container">
+    <h2>Giỏ hàng của bạn</h2>
+    
+    <a href="{% url 'main:home' %}" class="btn btn-back">← Trở về trang mua sắm</a>
+
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Ảnh</th>
+                <th>Mặt hàng</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>
+                    {% if item.product.ImageURL %}
+                    <img src="{{ item.product.ImageURL }}" class="product-image" alt="{{ item.product.ten_sp }}">
+                    {% else %}
+                    <div class="product-image placeholder">No image</div>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="#" class="product-name" data-product-id="{{ item.product.ma_sp }}">{{ item.product.ten_sp }}</a>
+                </td>
+                <td class="price">{{ item.product.gia_ban|floatformat:2 }} VND</td>
+                <td>
+                    <div class="quantity-control">
+                        <button class="quantity-btn" data-action="remove">-</button>
+                        <input type="number" class="quantity-input" value="{{ item.quantity }}" readonly>
+                        <button class="quantity-btn" data-action="add">+</button>
+                    </div>
+                </td>
+                <td class="price">{{ item.get_total|floatformat:2 }} VND</td>
+            </tr>
+            {% endfor %}
+            <tr class="total-row">
+                <td colspan="3"></td>
+                <td>Tổng cộng:</td>
+                <td class="price">{{ order.get_cart_total|floatformat:2 }} VND</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="nav-buttons">
+        <a href="{% url 'main:home' %}" class="btn btn-back">Tiếp tục mua sắm</a>
+        <a href="{% url 'main:checkout' %}" class="btn btn-checkout">Thanh toán</a>
+    </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+<script src="{% static 'js/cart-handler.js' %}"></script>
+<script>
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type} show`;
+    
+    setTimeout(() => {
+        toast.className = 'toast';
+    }, 3000);
+}
+
+// Bắt sự kiện click cho các nút + và -
+document.addEventListener('DOMContentLoaded', function() {
+    let updateBtns = document.getElementsByClassName('update-cart');
+    
+    for(let i = 0; i < updateBtns.length; i++) {
+        updateBtns[i].addEventListener('click', function() {
+            let productId = this.dataset.product;
+            let action = this.dataset.action;
+            
+            // Gọi hàm cập nhật giỏ hàng
+            updateUserOrder(productId, action);
+        });
+    }
+});
+
+function updateUserOrder(productId, action) {
+    // URL để gửi request cập nhật giỏ hàng
+    let url = '/update_item/';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify({
+            'productId': productId,
+            'action': action
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Hiển thị toast message
+        if(data.status === 'success') {
+            showToast('Cập nhật giỏ hàng thành công!', 'success');
+            // Reload trang để cập nhật thông tin
+            location.reload();
+        } else {
+            showToast('Có lỗi xảy ra!', 'error');
+        }
+    });
+}
+
+// Hàm lấy CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endblock %}
