@@ -1,0 +1,22 @@
+{% extends "login_base.html" %} {% load i18n static %} {% block title %}User
+Login{% endblock %} {% block content %}
+<div class="login-page">
+  <div class="login-container">
+    <div class="form-wrap">
+      <h3>Log in</h3>
+      <form action="{{ app_path }}" method="post" id="login-form">
+        {% csrf_token %}
+        <div class="form-row">
+          <label for="id_username">Username:</label>
+          <input type="text" name="username" id="id_username" required />
+        </div>
+        <div class="form-row">
+          <label for="id_password">Password:</label>
+          <input type="password" name="password" id="id_password" required />
+        </div>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

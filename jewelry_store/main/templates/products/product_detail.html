@@ -1,0 +1,64 @@
+{% extends "base.html" %} {% load static %} {% block title %}{{ product.name }}
+- Jewelry Store{% endblock %} {% block content %}
+<div class="product-detail-container">
+  <div class="product-detail-grid">
+    <div class="product-image-section">
+      <img
+        src="{{ product.image.url }}"
+        alt="{{ product.name }}"
+        class="main-product-image"
+      />
+    </div>
+
+    <div class="product-info-section">
+      <h1 class="product-title">{{ product.name }}</h1>
+      <div class="product-code">Mã sản phẩm: {{ product.code }}</div>
+
+      <div class="product-price">
+        {{ product.price|floatformat:0|intcomma }} VNĐ
+      </div>
+
+      <div class="product-specs">
+        <div class="spec-item">
+          <span class="spec-label">Danh mục:</span>
+          <span class="spec-value">{{ product.get_category_display }}</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-label">Trọng lượng:</span>
+          <span class="spec-value">{{ product.weight }}g</span>
+        </div>
+      </div>
+
+      <div class="product-description">
+        <h3>Mô tả sản phẩm</h3>
+        {{ product.description|linebreaks }}
+      </div>
+
+      <div class="contact-info">
+        <h3>Thông tin liên hệ</h3>
+        {{ product.contact_info|linebreaks }}
+      </div>
+    </div>
+  </div>
+
+  {% if related_products %}
+  <div class="related-products">
+    <h2>Sản phẩm liên quan</h2>
+    <div class="related-products-grid">
+      {% for related in related_products %}
+      <div class="related-product-card">
+        <img src="{{ related.image.url }}" alt="{{ related.name }}" />
+        <h3>{{ related.name }}</h3>
+        <p class="price">{{ related.price|floatformat:0|intcomma }} VNĐ</p>
+        <a
+          href="{% url 'main:product-detail' related.slug %}"
+          class="view-detail-btn"
+          >Xem chi tiết</a
+        >
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
